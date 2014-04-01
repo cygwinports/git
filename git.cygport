@@ -8,7 +8,7 @@
 inherit perl python
 
 NAME="git"
-VERSION=1.8.3.4
+VERSION=1.8.5.5
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Distributed version control system"
@@ -30,7 +30,7 @@ git_REQUIRES="cygutils less openssh rsync"
 git_CONTENTS="--exclude=gitk* --exclude=git-cvs* --exclude=git-*email*
 	--exclude=git-gui* --exclude=git-svn* --exclude=SVN* --exclude=Git.SVN.*
 	--exclude=git-instaweb* --exclude=gitweb*
-	usr/bin/ usr/libexec/git-core/ ${PERL_VENDORLIB#/} ${PYTHON_SITELIB#/} usr/share/"
+	usr/bin/ usr/libexec/git-core/ ${PERL_VENDORLIB#/} usr/share/"
 gitk_SUMMARY="Git repository browser"
 gitk_REQUIRES="git"
 gitk_CONTENTS="usr/bin/gitk usr/share/doc/git/html/gitk* usr/share/gitk
