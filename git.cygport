@@ -8,7 +8,7 @@
 inherit perl python
 
 NAME="git"
-VERSION=1.8.5.5
+VERSION=2.0.4
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Distributed version control system"
@@ -19,7 +19,7 @@ performance. It outclasses SCM tools like Subversion, CVS, Perforce, and
 ClearCase with features like cheap local branching, convenient staging areas,
 and multiple workflows."
 HOMEPAGE="http://git-scm.com/"
-SRC_URI="https://git-core.googlecode.com/files/git-${VERSION}.tar.gz"
+SRC_URI="https://github.com/git/git/archive/v${VERSION}/git-v${VERSION}.tar.gz"
 SRC_DIR="git-${VERSION}"
 PATCH_URI="
 	1.7.9-cygwin.patch
@@ -82,6 +82,16 @@ src_install() {
 	# ship bash completion
 	insinto /etc/bash_completion.d
   	newins ${S}/contrib/completion/git-completion.bash git
+}
+
+src_test() {
+	# Test t4018 fails if the files in the build directory are left as
+	# symlinks rather than being real files.
+	rm ${B}/t/t4018/*
+	cp ${S}/t/t4018/* ${B}/t/t4018
+	cd ${B}
+	defined ARCH_i686 && skip_tests=t9200
+	GIT_SKIP_TESTS=$skip_tests GIT_TEST_OPTS=--tee cygtest
 }
 
 # Local Variables:
